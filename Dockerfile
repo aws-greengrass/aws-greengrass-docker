@@ -31,7 +31,7 @@ RUN yum update -y && yum install -y python37 tar unzip wget sudo procps which &&
     # sudo apk add aws-cli && \
     rm -rf /var/cache/yum && \
     chmod +x /greengrass-entrypoint.sh && \
-    mkdir -p /opt/greengrassv2 /greengrass/v2 && unzip $GREENGRASS_ZIP_FILE -d /opt/greengrassv2 && rm $GREENGRASS_ZIP_FILE && rm $GREENGRASS_ZIP_SHA256
+    mkdir -p /opt/greengrassv2 $GGC_ROOT_PATH && unzip $GREENGRASS_ZIP_FILE -d /opt/greengrassv2 && rm $GREENGRASS_ZIP_FILE && rm $GREENGRASS_ZIP_SHA256
 
 # Expose port to subscribe to MQTT messages, network port
 EXPOSE 8883
