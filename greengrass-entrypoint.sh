@@ -4,6 +4,8 @@ set -e
 
 # Path that initial installation files are copied to
 INIT_JAR_PATH=/opt/greengrassv2
+#Default options
+OPTIONS="-Droot=${GGC_ROOT_PATH} -Dlog.store=FILE -Dlog.level=${LOG_LEVEL} -jar ${INIT_JAR_PATH}/lib/Greengrass.jar --provision ${PROVISION} --deploy-dev-tools ${DEPLOY_DEV_TOOLS} --aws-region ${AWS_REGION} --start false"
 
 # Allow the root user to execute commands as other users
 modify_sudoers() {
@@ -37,64 +39,66 @@ modify_sudoers() {
 	fi
 }
 
-OPTIONS="-Droot=${GGC_ROOT_PATH} -Dlog.store=FILE -Dlog.level=${LOG_LEVEL} -jar ${INIT_JAR_PATH}/lib/Greengrass.jar --provision ${PROVISION} --deploy-dev-tools ${DEPLOY_DEV_TOOLS} --aws-region ${AWS_REGION} --start false"
+parse_options() {
 
-# If provision is true
-if [ ${PROVISION} == "true" ]; then
+	# If provision is true
+	if [ ${PROVISION} == "true" ]; then
 
-	if [ ! -f "/root/.aws/credentials" ]; then
-		echo "Provision is set to true, but credentials file does not exist at /root/.aws/credentials . Please mount to this location and retry."
-		exit 1
-	fi
+		if [ ! -f "/root/.aws/credentials" ]; then
+			echo "Provision is set to true, but credentials file does not exist at /root/.aws/credentials . Please mount to this location and retry."
+			exit 1
+		fi
 
-	# If thing name is specified, add optional argument
-	# If not specified, reverts to default of "GreengrassV2IotThing_" plus a random UUID.
-	if [ ${THING_NAME} != default_thing_name ]; then
-	    OPTIONS="${OPTIONS} --thing-name ${THING_NAME}"
+		# If thing name is specified, add optional argument
+		# If not specified, reverts to default of "GreengrassV2IotThing_" plus a random UUID.
+		if [ ${THING_NAME} != default_thing_name ]; then
+		    OPTIONS="${OPTIONS} --thing-name ${THING_NAME}"
 
-	    # If thing group name is specified, add optional argument
-	    if [ ${THING_GROUP_NAME} != default_thing_group_name ]; then
-	    	OPTIONS="${OPTIONS} --thing-group-name ${THING_GROUP_NAME}"
+		    # If thing group name is specified, add optional argument
+		    if [ ${THING_GROUP_NAME} != default_thing_group_name ]; then
+		    	OPTIONS="${OPTIONS} --thing-group-name ${THING_GROUP_NAME}"
+			fi
 		fi
 	fi
-fi
 
-# If TES role name is specified, add optional argument
-# If not specified, reverts to default of "GreengrassV2TokenExchangeRole"
-if [ ${TES_ROLE_NAME} != default_tes_role_name ]; then
-	OPTIONS="${OPTIONS} --tes-role-name ${TES_ROLE_NAME}"
-fi
+	# If TES role name is specified, add optional argument
+	# If not specified, reverts to default of "GreengrassV2TokenExchangeRole"
+	if [ ${TES_ROLE_NAME} != default_tes_role_name ]; then
+		OPTIONS="${OPTIONS} --tes-role-name ${TES_ROLE_NAME}"
+	fi
 
-# If TES role name is specified, add optional argument
-# If not specified, reverts to default of "GreengrassV2TokenExchangeRoleAlias"
-if [ ${TES_ROLE_ALIAS_NAME} != default_tes_role_alias_name ]; then
-	OPTIONS="${OPTIONS} --tes-role-alias-name ${TES_ROLE_ALIAS_NAME}"
-fi
+	# If TES role name is specified, add optional argument
+	# If not specified, reverts to default of "GreengrassV2TokenExchangeRoleAlias"
+	if [ ${TES_ROLE_ALIAS_NAME} != default_tes_role_alias_name ]; then
+		OPTIONS="${OPTIONS} --tes-role-alias-name ${TES_ROLE_ALIAS_NAME}"
+	fi
 
-# If component default user is specified, add optional argument
-# If not specified, reverts to ggc_user:ggc_group 
-if [ ${COMPONENT_DEFAULT_USER} != default_component_user ]; then
-	OPTIONS="${OPTIONS} --component-default-user ${COMPONENT_DEFAULT_USER}"
-fi
+	# If component default user is specified, add optional argument
+	# If not specified, reverts to ggc_user:ggc_group 
+	if [ ${COMPONENT_DEFAULT_USER} != default_component_user ]; then
+		OPTIONS="${OPTIONS} --component-default-user ${COMPONENT_DEFAULT_USER}"
+	fi
 
-# Use optional init config argument
-# If this option is specified, the config file must be mounted to this location
-if [ ${INIT_CONFIG} != default_init_config ]; then
-	if [ -f ${INIT_CONFIG} ]; then
-		echo "Using specified init config file at ${INIT_CONFIG}"
-		OPTIONS="${OPTIONS} --init-config ${INIT_CONFIG}"
-    else
-    	echo "WARNING: Specified init config file does not exist at ${INIT_CONFIG} !"
-    fi
-fi
+	# Use optional init config argument
+	# If this option is specified, the config file must be mounted to this location
+	if [ ${INIT_CONFIG} != default_init_config ]; then
+		if [ -f ${INIT_CONFIG} ]; then
+			echo "Using specified init config file at ${INIT_CONFIG}"
+			OPTIONS="${OPTIONS} --init-config ${INIT_CONFIG}"
+	    else
+	    	echo "WARNING: Specified init config file does not exist at ${INIT_CONFIG} !"
+	    fi
+	fi
 
-echo "Running Greengrass with the following options: ${OPTIONS}"
+	echo "Running Greengrass with the following options: ${OPTIONS}"
+}
 
 # If we have not already installed Greengrass
 if [ ! -d $GGC_ROOT_PATH/alts/current/distro ]; then
 	# Install Greengrass via the main installer, but do not start running
 	echo "Installing Greengrass for the first time..."
 	modify_sudoers
+	parse_options
 	java ${OPTIONS}
 else
 	echo "Reusing existing Greengrass installation..."
