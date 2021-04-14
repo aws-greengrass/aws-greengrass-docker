@@ -1,3 +1,6 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
 version: '3.7'
 
 services:
@@ -7,7 +10,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: aws-iot-greengrass
-    image: x86_64/aws-iot-greengrass:2.0.0
+    image: x86_64/aws-iot-greengrass:2.1.0
     ports:
       - "8883:8883"
     entrypoint: "/greengrass-entrypoint.sh"

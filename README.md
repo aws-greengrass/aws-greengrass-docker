@@ -22,17 +22,17 @@ Note: If you have `docker-compose` installed, you can simply run `docker-compose
 
 ### Step 1. Build the AWS IoT Greengrass Docker Image
 #### On Linux or Mac OSX
-1- Download and decompress the `aws-greengrass-docker-2.0.0` package.
+1- Download and decompress the `aws-greengrass-docker-2.1.0` package.
 
-2- In a terminal, run the following commands in the location where you decompressed the `aws-greengrass-docker-2.0.0` package.
+2- In a terminal, run the following commands in the location where you decompressed the `aws-greengrass-docker-2.1.0` package.
 ```
-cd ~/Downloads/aws-greengrass-docker-2.0.0
-sudo docker build -t "x86_64/aws-iot-greengrass:2.0.0" ./
+cd ~/Downloads/aws-greengrass-docker-2.1.0
+sudo docker build -t "x86_64/aws-iot-greengrass:2.1.0" ./
 ```
 
 2a- If you have `docker-compose` installed, you can run the following commands instead:
 ```
-cd ~/Downloads/aws-greengrass-docker-2.0.0
+cd ~/Downloads/aws-greengrass-docker-2.1.0
 docker-compose -f docker-compose.yml build
 ```
 
@@ -56,7 +56,7 @@ https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-installer.htm
 ```
 docker images
 REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
-x86-64/aws-iot-greengrass           2.0.0               3f152d6707c8        17 seconds ago      695MB
+x86-64/aws-iot-greengrass           2.1.0               3f152d6707c8        17 seconds ago      695MB
 ```
 
 ### Step 2. Run the Docker Container
@@ -68,7 +68,7 @@ x86-64/aws-iot-greengrass           2.0.0               3f152d6707c8        17 s
 docker run --init -it --name aws-iot-greengrass \
 --entrypoint /greengrass-entrypoint.sh \
 -p 8883:8883 \
-x86_64/aws-iot-greengrass:2.0.0
+x86_64/aws-iot-greengrass:2.1.0
 ```
 
 Note: If you would like to provision your device for cloud deployments, use the following lines in the above command to mount your AWS credentials into the container to be picked up at `/root/.aws/credentials`. Ensure that the `:ro` suffix is present at the end of the command to ensure read-only access.
@@ -88,7 +88,7 @@ https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-installer.htm
 
 1a -  If you have `docker-compose` installed, you can run the following commands instead:
 ```
-cd ~/Downloads/aws-greengrass-docker-2.0.0
+cd ~/Downloads/aws-greengrass-docker-2.1.0
 docker-compose -f docker-compose.yml down
 docker-compose -f docker-compose.yml up
 ```
