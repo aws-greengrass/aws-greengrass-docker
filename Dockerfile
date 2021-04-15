@@ -9,6 +9,9 @@ ARG GREENGRASS_ZIP_FILE=greengrass-${GREENGRASS_RELEASE_VERSION}.zip
 ARG GREENGRASS_RELEASE_URI=https://d2s8p88vqu9w66.cloudfront.net/releases/${GREENGRASS_ZIP_FILE}
 ARG GREENGRASS_ZIP_SHA256=${GREENGRASS_ZIP_FILE}.sha256
 
+# Author
+LABEL maintainer="AWS IoT Greengrass"
+
 # Set up Greengrass v2 execution parameters
 ENV GGC_ROOT_PATH=/greengrass/v2 \
     PROVISION=false \
