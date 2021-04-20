@@ -41,3 +41,5 @@ RUN yum update -y && yum install -y python37 tar unzip wget sudo procps which &&
 
 # Expose port to subscribe to MQTT messages, network port
 EXPOSE 8883
+
+ENTRYPOINT ["/greengrass-entrypoint.sh"]

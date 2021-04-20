@@ -111,7 +111,7 @@ fi
 echo "Making loader script executable..."
 chmod +x $GGC_ROOT_PATH/alts/current/distro/bin/loader
 
-echo "Starting Greengrass..."
+sh "Starting Greengrass..."
 
 # Start greengrass kernel via the loader script and register container as a thing
 sh $GGC_ROOT_PATH/alts/current/distro/bin/loader
