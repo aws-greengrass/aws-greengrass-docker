@@ -5,6 +5,9 @@
 
 set -e
 
+#Disable job control so that all child processes run in the same process group as the parent
+set +m
+
 # Path that initial installation files are copied to
 INIT_JAR_PATH=/opt/greengrassv2
 #Default options

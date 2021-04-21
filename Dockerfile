@@ -13,7 +13,8 @@ ARG GREENGRASS_ZIP_SHA256=${GREENGRASS_ZIP_FILE}.sha256
 LABEL maintainer="AWS IoT Greengrass"
 
 # Set up Greengrass v2 execution parameters
-ENV GGC_ROOT_PATH=/greengrass/v2 \
+# TINI_KILL_PROCESS_GROUP allows forwarding SIGTERM to all PIDs in the PID group
+ENV TINI_KILL_PROCESS_GROUP=1 \
     PROVISION=false \
     AWS_REGION=us-east-1 \
     THING_NAME=default_thing_name \
