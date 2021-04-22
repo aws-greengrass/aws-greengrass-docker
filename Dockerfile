@@ -14,6 +14,7 @@ ARG GREENGRASS_ZIP_SHA256=${GREENGRASS_ZIP_FILE}.sha256
 
 # Set up Greengrass v2 execution parameters
 ENV TINI_KILL_PROCESS_GROUP=1 \ # Allows forwarding SIGTERM to all PIDs in the PID group so Greengrass can exit gracefully
+    GGC_ROOT_PATH=/greengrass/v2 \
     PROVISION=false \
     AWS_REGION=us-east-1 \
     THING_NAME=default_thing_name \
