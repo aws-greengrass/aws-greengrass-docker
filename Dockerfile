@@ -3,18 +3,17 @@
 
 FROM amazonlinux:2
 
+# Author
+LABEL maintainer="AWS IoT Greengrass"
+
 # Replace the args to lock to a specific version
 ARG GREENGRASS_RELEASE_VERSION=2.1.0
 ARG GREENGRASS_ZIP_FILE=greengrass-${GREENGRASS_RELEASE_VERSION}.zip
 ARG GREENGRASS_RELEASE_URI=https://d2s8p88vqu9w66.cloudfront.net/releases/${GREENGRASS_ZIP_FILE}
 ARG GREENGRASS_ZIP_SHA256=${GREENGRASS_ZIP_FILE}.sha256
 
-# Author
-LABEL maintainer="AWS IoT Greengrass"
-
 # Set up Greengrass v2 execution parameters
-# TINI_KILL_PROCESS_GROUP allows forwarding SIGTERM to all PIDs in the PID group
-ENV TINI_KILL_PROCESS_GROUP=1 \
+ENV TINI_KILL_PROCESS_GROUP=1 \ # Allows forwarding SIGTERM to all PIDs in the PID group so Greengrass can exit gracefully
     PROVISION=false \
     AWS_REGION=us-east-1 \
     THING_NAME=default_thing_name \
@@ -34,8 +33,6 @@ COPY "${GREENGRASS_ZIP_SHA256}" /
 RUN yum update -y && yum install -y python37 tar unzip wget sudo procps which && \
     amazon-linux-extras enable python3.8 && yum install -y python3.8 java-11-amazon-corretto-headless && \
     wget $GREENGRASS_RELEASE_URI && sha256sum -c ${GREENGRASS_ZIP_SHA256} && \
-    # Install aws-cli, (optional)
-    # sudo apk add aws-cli && \
     rm -rf /var/cache/yum && \
     chmod +x /greengrass-entrypoint.sh && \
     mkdir -p /opt/greengrassv2 $GGC_ROOT_PATH && unzip $GREENGRASS_ZIP_FILE -d /opt/greengrassv2 && rm $GREENGRASS_ZIP_FILE && rm $GREENGRASS_ZIP_SHA256
