@@ -33,7 +33,7 @@ If available, add `docker_container.log` and `docker_inspect.json`.
  - Docker image version
  - `docker-compose` version
  - Output of `uname -a`
- - Output of `cat /etc/os-release`
+ - Output of `cat /etc/os-release` or its equivalent
 
 **Additional context**
 Add any other context about the problem here.
