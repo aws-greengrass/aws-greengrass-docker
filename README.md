@@ -66,7 +66,6 @@ x86-64/aws-iot-greengrass           2.1.0               3f152d6707c8        17 s
 
 ```
 docker run --init -it --name aws-iot-greengrass \
--p 8883:8883 \
 x86_64/aws-iot-greengrass:2.1.0
 ```
 
