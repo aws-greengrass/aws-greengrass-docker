@@ -41,7 +41,8 @@ docker-compose -f docker-compose.yml build
   
 	```
 	environment:  
-	 - PROVISION=truevolumes:  
+	 - PROVISION=true
+	volumes:  
 	 - /path/to/credential/directory/:/root/.aws/:ro
 	 ```
   
