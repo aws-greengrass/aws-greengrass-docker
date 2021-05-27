@@ -60,10 +60,11 @@ parse_options() {
 		if [ ${THING_NAME} != default_thing_name ]; then
 		    OPTIONS="${OPTIONS} --thing-name ${THING_NAME}"
 
-		    # If thing group name is specified, add optional argument
-		    if [ ${THING_GROUP_NAME} != default_thing_group_name ]; then
-		    	OPTIONS="${OPTIONS} --thing-group-name ${THING_GROUP_NAME}"
-			fi
+		    
+		fi
+		# If thing group name is specified, add optional argument
+		if [ ${THING_GROUP_NAME} != default_thing_group_name ]; then
+			OPTIONS="${OPTIONS} --thing-group-name ${THING_GROUP_NAME}"
 		fi
 	fi
 
