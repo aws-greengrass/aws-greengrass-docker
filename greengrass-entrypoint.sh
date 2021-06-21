@@ -100,11 +100,13 @@ parse_options() {
 	echo "Running Greengrass with the following options: ${OPTIONS}"
 }
 
+# Always modify /etc/sudoers
+modify_sudoers
+
 # If we have not already installed Greengrass
 if [ ! -d $GGC_ROOT_PATH/alts/current/distro ]; then
 	# Install Greengrass via the main installer, but do not start running
-	echo "Installing Greengrass for the first time..."
-	modify_sudoers
+	echo "Installing Greengrass for the first time..."	
 	parse_options
 	java ${OPTIONS}
 else
