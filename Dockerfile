@@ -3,14 +3,16 @@
 
 FROM amazonlinux:2
 
-# Author
-LABEL maintainer="AWS IoT Greengrass"
-
 # Replace the args to lock to a specific version
 ARG GREENGRASS_RELEASE_VERSION=2.1.0
 ARG GREENGRASS_ZIP_FILE=greengrass-${GREENGRASS_RELEASE_VERSION}.zip
 ARG GREENGRASS_RELEASE_URI=https://d2s8p88vqu9w66.cloudfront.net/releases/${GREENGRASS_ZIP_FILE}
 ARG GREENGRASS_ZIP_SHA256=${GREENGRASS_ZIP_FILE}.sha256
+
+# Author
+LABEL maintainer="AWS IoT Greengrass"
+# Greengrass Version
+LABEL greengrass-version=${GREENGRASS_RELEASE_VERSION}
 
 # Set up Greengrass v2 execution parameters
 # TINI_KILL_PROCESS_GROUP allows forwarding SIGTERM to all PIDs in the PID group so Greengrass can exit gracefully
