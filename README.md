@@ -23,17 +23,17 @@ Note: If you have `docker-compose` installed, you can simply run `docker-compose
 ### Step 1. Build the AWS IoT Greengrass Docker Image  
 #### On Linux or Mac OSX  
   
-**1.1** Download and decompress the `aws-greengrass-docker-2.1.0` package.  
+**1.1** Download and decompress the `aws-greengrass-docker-<GREENGRASS_VERSION>` package.
   
-**1.2** In a terminal, run the following commands in the location where you decompressed the `aws-greengrass-docker-2.1.0` package.  
+**1.2** In a terminal, run the following commands in the location where you decompressed the `aws-greengrass-docker-<GREENGRASS_VERSION>` package.
 ```  
-cd ~/Downloads/aws-greengrass-docker-2.1.0  
-sudo docker build -t "x86_64/aws-iot-greengrass:2.1.0" ./  
+cd ~/Downloads/aws-greengrass-docker-<GREENGRASS_VERSION>
+sudo docker build -t "x86_64/aws-iot-greengrass:<GREENGRASS_VERSION>" ./
 ```  
   
 **1.2.1** If you have `docker-compose` installed, you can run the following commands instead:  
 ```
-cd ~/Downloads/aws-greengrass-docker-2.1.0 
+cd ~/Downloads/aws-greengrass-docker-<GREENGRASS_VERSION>
 docker-compose -f docker-compose.yml build        
  ```
      
@@ -56,8 +56,8 @@ Please see [the installer documentation](https://docs.aws.amazon.com/greengrass/
 **1.3**  Verify that the Greengrass Docker image was built.  
 ```  
 docker images  
-REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE  
-x86-64/aws-iot-greengrass           2.1.0               3f152d6707c8        17 seconds ago      695MB  
+REPOSITORY                          TAG                 	IMAGE ID            CREATED             SIZE
+x86-64/aws-iot-greengrass           <GREENGRASS_VERSION>	3f152d6707c8        17 seconds ago      695MB
 ```  
   
 ### Step 2. Run the Docker Container  
@@ -67,7 +67,7 @@ x86-64/aws-iot-greengrass           2.1.0               3f152d6707c8        17 s
   
 ```
 docker run --init -it --name aws-iot-greengrass \  
-x86_64/aws-iot-greengrass:2.1.0  
+x86_64/aws-iot-greengrass:<GREENGRASS_VERSION>
 ```
 * Replace `-it` with `-d`  to run this container in the background in [detached mode](https://docs.docker.com/engine/reference/run/#detached-vs-foreground).
 * **Note**: If you would like to provision your device for cloud deployments, use the following lines in the above command to mount your AWS credentials into the container to be picked up at `/root/.aws/credentials`. Ensure that the `:ro` suffix is present at the end of the command to ensure read-only access.  
@@ -85,7 +85,7 @@ Please see [the installer documentation](https://docs.aws.amazon.com/greengrass/
   
 **2.1.1**  If you have `docker-compose` installed, you can run the following commands instead:  
 ```  
-cd ~/Downloads/aws-greengrass-docker-2.1.0  
+cd ~/Downloads/aws-greengrass-docker-<GREENGRASS_VERSION>
 docker-compose -f docker-compose.yml up  
 ```  
   
