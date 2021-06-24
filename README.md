@@ -57,7 +57,7 @@ Please see [the installer documentation](https://docs.aws.amazon.com/greengrass/
 ```  
 docker images  
 REPOSITORY                          TAG                 				IMAGE ID            CREATED             SIZE
-x86-64/aws-iot-greengrass           <GREENGRASS_VERSION>               3f152d6707c8        17 seconds ago      695MB
+x86-64/aws-iot-greengrass           <GREENGRASS_VERSION>				3f152d6707c8        17 seconds ago      695MB
 ```  
   
 ### Step 2. Run the Docker Container  
