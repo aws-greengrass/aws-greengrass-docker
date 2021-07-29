@@ -36,6 +36,10 @@ parse_options() {
 		fi
 	fi
 
+	if [ ${TRUSTED_PLUGIN} != default_trusted_plugin_path ]; then
+	  OPTIONS="${OPTIONS} --trusted-plugin ${TRUSTED_PLUGIN}"
+	fi
+
 	# If TES role name is specified, add optional argument
 	# If not specified, reverts to default of "GreengrassV2TokenExchangeRole"
 	if [ ${TES_ROLE_NAME} != default_tes_role_name ]; then
