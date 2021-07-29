@@ -36,6 +36,8 @@ parse_options() {
 		fi
 	fi
 
+  # If TRUSTED_PLUGIN is specified, add optional argument
+  # If not specified, it will not use this argument
 	if [ ${TRUSTED_PLUGIN} != default_trusted_plugin_path ]; then
 	  OPTIONS="${OPTIONS} --trusted-plugin ${TRUSTED_PLUGIN}"
 	fi
