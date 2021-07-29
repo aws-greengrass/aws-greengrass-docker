@@ -26,7 +26,8 @@ ENV TINI_KILL_PROCESS_GROUP=1 \
     TES_ROLE_ALIAS_NAME=default_tes_role_alias_name \
     COMPONENT_DEFAULT_USER=default_component_user \
     DEPLOY_DEV_TOOLS=false \
-    INIT_CONFIG=default_init_config
+    INIT_CONFIG=default_init_config \
+    TRUSTED_PLUGIN=default_trusted_plugin_path
 RUN env
 
 # Entrypoint script to install and run Greengrass
