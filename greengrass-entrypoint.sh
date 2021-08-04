@@ -33,7 +33,13 @@ parse_options() {
 		# If thing group name is specified, add optional argument
 		if [ ${THING_GROUP_NAME} != default_thing_group_name ]; then
 			OPTIONS="${OPTIONS} --thing-group-name ${THING_GROUP_NAME}"
+
 		fi
+
+               # If thing group policy is specified, add optional argument
+               if [ ${THING_POLICY_NAME} != default_thing_policy_name ]; then
+                       OPTIONS="${OPTIONS} --thing-policy-name ${THING_POLICY_NAME}"
+               fi
 	fi
 
   # If TRUSTED_PLUGIN is specified, add optional argument
