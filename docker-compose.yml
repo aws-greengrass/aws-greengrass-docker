@@ -10,4 +10,4 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: aws-iot-greengrass
-    image: x86_64/aws-iot-greengrass:2.4.0
+    image: x86_64/aws-iot-greengrass:2.5.2

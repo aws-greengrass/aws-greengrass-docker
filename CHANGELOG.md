@@ -22,3 +22,7 @@ Greengrass v2.3.0 release notes: https://docs.aws.amazon.com/greengrass/v2/devel
 Greengrass in Docker release with Greengrass v2.4.0
 Includes bug fixes and improvements
 Greengrass v2.4.0 release notes: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-release-2021-08-03.html
+
+Greengrass in Docker release with Greengrass v2.5.2
+Includes bug fixes and improvements
+Greengrass v2.5.2 release notes: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-release-2021-12-03.html
