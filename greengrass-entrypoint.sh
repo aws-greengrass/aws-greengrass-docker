@@ -16,7 +16,7 @@ OPTIONS="-Droot=${GGC_ROOT_PATH} -Dlog.store=FILE -Dlog.level=${LOG_LEVEL} -jar 
 parse_options() {
 
 	# If provision is true
-	if [ ${PROVISION} == "true" ]; then
+	if [ ${PROVISION} = "true" ]; then
 
 		if [ ! -f "/root/.aws/credentials" ]; then
 			echo "Provision is set to true, but credentials file does not exist at /root/.aws/credentials . Please mount to this location and retry."
