@@ -38,6 +38,8 @@ sudo docker build --platform <platform> -t "aws-iot-greengrasss:<GREENGRASS_VERS
 ```
 
 `<platform>` can be `linux/aarch64` for example. See [Docker docs](https://docs.docker.com/build/building/multi-platform/#building-multi-platform-images) for more information.
+
+Docker CLI v20.10.13 or greater is required to support this.
   
 **1.2.2** If you have `docker-compose` installed, you can run the following commands instead:  
 ```
