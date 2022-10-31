@@ -34,7 +34,7 @@ sudo docker build -t "x86_64/aws-iot-greengrass:<GREENGRASS_VERSION>" ./
 **1.2.1** If you want to cross-build for a different platform, aarch64 for example.
 ```
 cd ~/Downloads/aws-greengrass-docker-<GREENGRASS_VERSION>
-sudo docker build --platform <platform> -t "aws-iot-greengrasss:<GREENGRASS_VERSION> ./"
+sudo docker build --platform <platform> -t "aws-iot-greengrasss:<GREENGRASS_VERSION>" ./
 ```
 
 `<platform>` can be `linux/aarch64` for example. See [Docker docs](https://docs.docker.com/build/building/multi-platform/#building-multi-platform-images) for more information.
