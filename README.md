@@ -98,6 +98,7 @@ https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-aws-servi
 	Use the following lines in the above command to provide the access key ID, secret access key, and session token from an IAM role that you assume for the container. For more information about how to retrieve these credentials, see [Requesting temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html) in the IAM User Guide.
 
 	```  
+	-e PROVISION=true \  
 	-e AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE \  
 	-e AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY \  
 	-e AWS_SESSION_TOKEN=AQoDYXdzEJr1K...o5OytwEXAMPLE= \  
