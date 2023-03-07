@@ -47,7 +47,7 @@ cd ~/Downloads/aws-greengrass-docker-<GREENGRASS_VERSION>
 docker-compose -f docker-compose.yml build        
  ```
      
- * **Note**: If you want to provision the device upon startup for cloud deployments, you will need to add the following lines to your docker-compose file to mount your AWS credentials into the container to be picked up at `/root/.aws/credentials` . Ensure that the `:ro` suffix is present at the end of the command to ensure read-only access.  
+ * **Note**: If you want to provision the device upon startup for cloud deployments, you will need to add the following lines to your docker-compose file to mount your AWS credentials into the container to be picked up at `/root/.aws/credentials` . Ensure that the `:ro` suffix is present at the end of the command to ensure read-only access. (This will build image use long-term credentials from an IAM user) 
   
 	```
 	environment:  
@@ -80,14 +80,29 @@ docker run --init -it --name aws-iot-greengrass \
 x86_64/aws-iot-greengrass:<GREENGRASS_VERSION>
 ```
 * Replace `-it` with `-d`  to run this container in the background in [detached mode](https://docs.docker.com/engine/reference/run/#detached-vs-foreground).
-* **Note**: If you would like to provision your device for cloud deployments, use the following lines in the above command to mount your AWS credentials into the container to be picked up at `/root/.aws/credentials`. Ensure that the `:ro` suffix is present at the end of the command to ensure read-only access.  
+
+* **Note**: If you would like to provision your device for cloud deployments one of the following to retrieve credentials and make them available to the AWS IoT Greengrass Core software installer
+
+	**2.1.1** **Use long-term credentials from an IAM user:** 
+	Use the following lines in the above command to mount your AWS credentials into the container to be picked up at `/root/.aws/credentials`. Ensure that the `:ro` suffix is present at the end of the command to ensure read-only access. 
 
 	```  
 	-e PROVISION=true \  
 	-v /path/to/credential/directory/:/root/.aws/:ro \  
 	``` 
-* **WARNING**: We strongly recommend removing this credential file from your host after the initial setup, as further authorization will be handled by the Greengrass Token Exchange Service using X.509 certificates. For more information, [see how Greengrass interacts with AWS services](
+
+	* **WARNING**: We strongly recommend removing this credential file from your host after the initial setup, as further authorization will be handled by the Greengrass Token Exchange Service using X.509 certificates. For more information, [see how Greengrass interacts with AWS services](
 https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-aws-services.html ) . 
+
+	**2.1.2** **(Recommended) Use temporary security credentials from an IAM role:** 
+	Use the following lines in the above command to provide the access key ID, secret access key, and session token from an IAM role that you assume for the container. For more information about how to retrieve these credentials, see [Requesting temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html) in the IAM User Guide.
+
+	```  
+	-e PROVISION=true \  
+	-e AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE \  
+	-e AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY \  
+	-e AWS_SESSION_TOKEN=AQoDYXdzEJr1K...o5OytwEXAMPLE= \  
+	``` 
   
 * If you would like to override any of the default configuration options or use your own config file to start Greengrass, specify those environment variables in the `environment` section as well. If you wish to use your own init config file, you must mount it to the directory you specify in the `INIT_CONFIG` environment variable, as well as mounting any extra files (e.g. custom certificates) you refer to in the init config file.  
 Please see [the installer documentation](https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-installer.html ) for configuration options and behavior. 
