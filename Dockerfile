@@ -1,10 +1,10 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-FROM amazonlinux:2
+FROM amazonlinux:2023
 
 # Replace the args to lock to a specific version
-ARG GREENGRASS_RELEASE_VERSION=2.10.3
+ARG GREENGRASS_RELEASE_VERSION=2.12.4
 ARG GREENGRASS_ZIP_FILE=greengrass-${GREENGRASS_RELEASE_VERSION}.zip
 ARG GREENGRASS_RELEASE_URI=https://d2s8p88vqu9w66.cloudfront.net/releases/${GREENGRASS_ZIP_FILE}
 
@@ -34,8 +34,8 @@ RUN env
 COPY "greengrass-entrypoint.sh" /
 
 # Install Greengrass v2 dependencies
-RUN yum update -y && yum install -y python37 tar unzip wget sudo procps which && \
-    amazon-linux-extras enable python3.8 && yum install -y python3.8 java-11-amazon-corretto-headless && \
+RUN yum update -y && \
+    yum install -y tar unzip wget sudo procps which shadow-utils python3 java-11-amazon-corretto-headless && \
     wget $GREENGRASS_RELEASE_URI && \
     rm -rf /var/cache/yum && \
     chmod +x /greengrass-entrypoint.sh && \
