@@ -103,6 +103,15 @@ https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-aws-servi
 	-e AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY \  
 	-e AWS_SESSION_TOKEN=AQoDYXdzEJr1K...o5OytwEXAMPLE= \  
 	``` 
+
+	**2.1.3** **Use long-term security credentials from an IAM user:**
+	Use the following lines in the above command to provide the access key ID and secret access key from an IAM user that you assume for the container. For more information about how to retrieve these credentials, see [Use long-term credentials from an IAM user](https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-installation.html#provide-installer-aws-credentials) in the Greengrass Developer Guide.
+
+	```
+	-e PROVISION=true \
+	-e AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE \
+	-e AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY \
+	```
   
 * If you would like to override any of the default configuration options or use your own config file to start Greengrass, specify those environment variables in the `environment` section as well. If you wish to use your own init config file, you must mount it to the directory you specify in the `INIT_CONFIG` environment variable, as well as mounting any extra files (e.g. custom certificates) you refer to in the init config file.  
 Please see [the installer documentation](https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-installer.html ) for configuration options and behavior. 
