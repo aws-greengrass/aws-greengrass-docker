@@ -1,0 +1,16 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wagoid/commitlint-github-action@v6
+      - name: Build image
+        run: docker build -t "aws-iot-greengrass:latest" ./
+      - name: Run image
+        run: docker run --init -e STARTUP=false aws-iot-greengrass:latest
