@@ -86,6 +86,11 @@ if [ ! -d $GGC_ROOT_PATH/alts/current/distro ]; then
 	echo "Installing Greengrass for the first time..."
 	parse_options
 	java ${OPTIONS}
+	if [ $? -ne 0 ]; then
+	  exit $?
+	elif [ ${STARTUP} = "false" ]; then
+	  exit 0
+  fi
 else
 	echo "Reusing existing Greengrass installation..."
 fi

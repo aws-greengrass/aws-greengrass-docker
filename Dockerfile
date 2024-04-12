@@ -4,7 +4,7 @@
 FROM amazonlinux:2023
 
 # Replace the args to lock to a specific version
-ARG GREENGRASS_RELEASE_VERSION=2.12.4
+ARG GREENGRASS_RELEASE_VERSION=latest
 ARG GREENGRASS_ZIP_FILE=greengrass-${GREENGRASS_RELEASE_VERSION}.zip
 ARG GREENGRASS_RELEASE_URI=https://d2s8p88vqu9w66.cloudfront.net/releases/${GREENGRASS_ZIP_FILE}
 
