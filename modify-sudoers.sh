@@ -13,7 +13,7 @@ ROOT_LINE_NUM=$(grep -n "^root" /etc/sudoers | cut -d : -f 1)
 # Check if the root user is already configured to execute commands as other users
 if sudo sed -n "${ROOT_LINE_NUM}p" /etc/sudoers | grep -q "ALL=(ALL:ALL)" ; then
   echo "Root user is already configured to execute commands as other users."
-  return 0
+  exit 0
 fi
 
 echo "Attempting to safely modify /etc/sudoers..."
