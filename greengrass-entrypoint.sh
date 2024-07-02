@@ -88,7 +88,7 @@ if [ ! -d $GGC_ROOT_PATH/alts/current/distro ]; then
 	java ${OPTIONS}
 	if [ $? -ne 0 ]; then
 	  exit $?
-	elif [ ${STARTUP} = "false" ]; then
+	elif [ "${STARTUP}" = "false" ]; then
 	  exit 0
   fi
 else
