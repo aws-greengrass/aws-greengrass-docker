@@ -1,6 +1,8 @@
 
 # Running AWS IoT Greengrass V2 in a Docker Container  
 ## Overview  
+**This repository provides example/reference Docker configurations for running AWS IoT Greengrass V2 in containers.** It is intended as a starting point for containerized Greengrass deployments and may require customization for production use.
+
 AWS IoT Greengrass can run in a Docker container. You can use the Dockerfile in this package to build a container image that runs on `x86_64` platforms.   
   
 This guide will show you how to:  
@@ -82,6 +84,8 @@ x86_64/aws-iot-greengrass:<GREENGRASS_VERSION>
 * Replace `-it` with `-d`  to run this container in the background in [detached mode](https://docs.docker.com/engine/reference/run/#detached-vs-foreground).
 
 * **Note**: If you would like to provision your device for cloud deployments one of the following to retrieve credentials and make them available to the AWS IoT Greengrass Core software installer
+
+* **Important**: The entrypoint script validates only basic credential sources (credentials file and environment variables). It does not check the full AWS credential chain (EC2 instance roles, ECS task roles, etc.). If using other credential sources, you may need to modify the validation logic in `greengrass-entrypoint.sh` or set `PROVISION=false` and handle provisioning separately.
 
 	**2.1.1** **Use long-term credentials from an IAM user:** 
 	Use the following lines in the above command to mount your AWS credentials into the container to be picked up at `/root/.aws/credentials`. Ensure that the `:ro` suffix is present at the end of the command to ensure read-only access. 
