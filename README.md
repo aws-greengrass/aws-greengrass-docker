@@ -13,9 +13,11 @@ This guide will show you how to:
   
 ## Prerequisites  
 * Mac OSX or Linux host computer running Docker and Docker Compose (optional).  
- * The Docker installation (version 18.09 or later) can be found [here](https://docs.docker.com/install/ ).
- * The Docker Compose installation (version 1.22 or later) can be found [here]( https://docs.docker.com/compose/install/).
-   Docker for Mac OS and Docker Toolbox include Compose, so those platforms don't need a separate Compose installation. Note: You must have version 1.22 or later because `init` support is required.  
+	* The Docker installation (version 18.09 or later) can be found [here](https://docs.docker.com/install/ ).
+	* The Docker Compose installation (version 1.22 or later) can be found [here]( https://docs.docker.com/compose/install/).
+	* Docker for Mac OS and Docker Toolbox include Compose, so those platforms don't need a separate Compose installation. Note: You must have version 1.22 or later because `init` support is required.
+* Windows OS
+	* Use the `Dockerfile4WindowsBuild` as your build image `-f` parameter
   
 ## Running AWS IoT Greengrass in a Docker Container  
 The following steps show how to build the Docker image from the Dockerfile and configure AWS IoT Greengrass to run in a Docker container.  
